@@ -1,0 +1,98 @@
+body {
+    background-color: #363062;
+}
+
+/*--------------------*/
+.container {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+}
+
+.container > div {
+    width: 200px;
+    height: auto;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/*content ---------------*/
+
+#showList {
+    display: flex;
+    flex-direction: column;
+}
+
+#done {
+    background-color: darkslateblue;
+    color: white;
+    border-radius: 0 5px 5px 0;
+    border: solid black 1px
+}
+
+#done:hover {
+    background-color: dodgerblue;
+}
+
+.cancelbut {
+    display: none;
+    font-size: 1rem;
+    font-family: sans-serif;
+    color: #aaa;
+    float: right;
+}
+
+div.item-div:hover .cancelbut {
+    display: inline;
+}
+
+.cancelbut:hover {
+    color: #F5E8C7;
+    cursor: pointer;
+}
+
+#inputText {
+    height: 20px;
+    flex-grow: 1;
+    margin-right: -1px;
+    border-radius: 5px 0 0 5px;
+    border: solid black 1px;
+}
+
+#inputText:focus {
+    outline: none;
+}
+
+.addItem, .title {
+    font-weight: bold;
+    font-size: 1.3rem;
+    color: #F5E8C7;
+}
+
+.titleCon {
+    display: flex;
+    justify-content: center;
+}
+
+.title {
+    font-size: 2rem;
+}
+
+#addModal {
+    background-color: #435585;
+}
+
+.listItem {
+    font-size: 1rem;
+    color: #F5E8C7;
+}
+
+.item-div {
+    padding: 5px;
+}
+
+.input {
+    display: flex;
+    margin: 10px 0 0 0;
+}

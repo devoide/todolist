@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>To-Do List</title>
+  <link rel="stylesheet" href="stylesheet.css">
+  <script src="script.js"></script>
+</head>
+<body>
+  <main>
+    <div class="titleCon">
+      <span class="title">
+        To-Do List
+      </span>
+    </div>
+    <div class="container">
+      <div class="aboveCon">
+        <div id="addModal">
+          <form>
+            <span class="addItem">New Task</span>
+            <div class="input">
+              <input type="text" id="inputText" placeholder="New Task" maxlength="50" required><br>
+              <button id="done" type="submit">add</button>
+            </div>
+          </form>
+        </div>
+        <div>
+          <button id="deleteBtn">delete all</button>
+        </div>
+      </div>
+      <div id="showList">
+        <div id="list">
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
