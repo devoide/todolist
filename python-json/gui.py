@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+import customtkinter
 from logic import *
 
 
@@ -41,7 +42,7 @@ def loadFolders():
     tasks = loadTasks()
     for index, i in enumerate(tasks["tasks"], start=0):
         folder = tk.Button(sidebar_Frame, text=i, bg=sidebar, fg="white", command=lambda fname=i: loadItems(fname))
-        folder.grid(row=index, column=0, sticky="nsew")
+        folder.pack(fill="x", ipady=5)
     if tasks["data"]["lastclose"] != "":
         itemBtnCreate()
         loadItems(tasks["data"]["lastclose"])
@@ -52,11 +53,13 @@ def loadItems(folderName):
     titleLabel.config(text=folderName)
     itemBtnCreate()
     tasks = loadTasks()
-    for index, i in enumerate(tasks["tasks"][folderName], start=0):
-        listtext = tk.Checkbutton(main_Frame, bg=main, fg="white", text=i["content"])
-        listtext.grid(row=index, column=5, columnspan=2, sticky="w")
-        delBtnItem = ttk.Button(main_Frame, text="delete", command=lambda id=i["id"]: guiDeleteItem(folderName, id))
-        delBtnItem.grid(row=index, column=7, sticky="w")
+    for i in tasks["tasks"][folderName]:
+        task_Frame = tk.Frame(main_Frame, bg=main)
+        listtext = ttk.Checkbutton(task_Frame, text=i["content"])
+        listtext.pack(side="left", padx=5, pady=5)
+        delBtnItem = ttk.Button(task_Frame, text="delete", command=lambda id=i["id"]: guiDeleteItem(folderName, id))
+        delBtnItem.pack(side="right", padx=5, pady=5)
+        task_Frame.pack(side="top", fill="x", padx=20)
     global delBtnFolder
     delBtnFolder = tk.Button(top_Frame, text="delete folder", bg=top, fg="white",
                              command=lambda fname=folderName: guiDeleteFolder(fname))
@@ -141,15 +144,13 @@ main = "#4c00a4"
 # widgets
 # frame
 top_Frame = tk.Frame(master, bg=top)
-sidebar_Frame = tk.Frame(master, bg=sidebar)
-main_Frame = tk.Frame(master, bg=main)
+sidebar_Frame = customtkinter.CTkScrollableFrame(master, fg_color=sidebar, bg_color=sidebar, scrollbar_button_color=sidebar)
+main_Frame = customtkinter.CTkScrollableFrame(master, fg_color=main, bg_color=main)
 
-top_Frame.grid(row=0, column=0, columnspan=5, sticky="nsew")
-sidebar_Frame.grid(row=1, column=0, rowspan=4, sticky="nsew")
-main_Frame.grid(row=1, column=1, rowspan=4, columnspan=4, sticky="nsew")
+top_Frame.pack(side="top", fill="both", ipady=25)
+main_Frame.pack(side="right", fill="both", expand=True)
+sidebar_Frame.pack(side="top", fill="y", expand=True)
 
-# img
-master.iconbitmap("./img/23.ico")
 
 # label
 titleLabel = ttk.Label(top_Frame, text="Choose or create a folder", foreground="white", background="black")
@@ -170,16 +171,12 @@ for i in range(5):
     master.rowconfigure(i, weight=1)
     master.columnconfigure(i, weight=1)
 
-for i in range(20):
-    sidebar_Frame.rowconfigure(i, weight=1)
-    main_Frame.rowconfigure(i, weight=1)
-sidebar_Frame.columnconfigure(0, weight=1)
-
 for i in range(12):
     top_Frame.columnconfigure(i, weight=1)
-    main_Frame.columnconfigure(i, weight=1)
 for i in range(3):
     top_Frame.rowconfigure(i, weight=1)
+
+
 
 if __name__ == '__main__':
     loadFolders()
